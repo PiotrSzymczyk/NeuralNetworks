@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace NeuralNetworks
 {
-    public class Perceptron
+    public class Neuron
     {
         public double Threshold { get; private set; }
         public double BiasWeight { get; private set; }
@@ -13,11 +13,12 @@ namespace NeuralNetworks
         public NeuronType NeuronType { get; set; }
         public double MaxError { get; set; }
         public double MeanTotalError => totalNeuronError/numOfRecords;
+        public string Log { get; set; }
 
         private double totalNeuronError;
         private int numOfRecords;
 
-        public Perceptron(int numberOfInputs)
+        public Neuron(int numberOfInputs)
         {
             var rand = new Random();
             BiasWeight = rand.NextDouble();
@@ -31,7 +32,7 @@ namespace NeuralNetworks
 
         }
         
-        public Perceptron(double threshold, double biasWeight, List<double> inputWeights)
+        public Neuron(double threshold, double biasWeight, List<double> inputWeights)
         {
             this.BiasWeight = biasWeight;
             this.InputWeights = inputWeights;
@@ -39,7 +40,7 @@ namespace NeuralNetworks
             this.NeuronType = NeuronType.Perceptron;
         }
 
-        public Perceptron(double threshold, double biasWeight, params double[] inputWeights)
+        public Neuron(double threshold, double biasWeight, params double[] inputWeights)
         {
             this.BiasWeight = biasWeight;
             this.InputWeights = inputWeights.ToList();
@@ -47,34 +48,19 @@ namespace NeuralNetworks
             this.NeuronType = NeuronType.Perceptron;
         }
 
-        public double GetOutput(List<double> inputs)
+        public int GetOutput(List<double> inputs)
         {
-            switch (NeuronType)
-            {
-                case NeuronType.Perceptron:
-                    return SumInputs(inputs) > Threshold ? 1 : 0;
-                case NeuronType.Adaline:
-                    return SumInputs(inputs);
-                default:
-                    throw new Exception("Neuron type not found");
-            }
+            return SumInputs(inputs) > Threshold ? 1 : 0;
         }
 
-        public double GetOutput(params double[] inputValues)
+        public int GetOutput(params double[] inputValues)
         {
-            switch (NeuronType)
-            {
-                case NeuronType.Perceptron:
-                    return SumInputs(inputValues.ToList()) > Threshold ? 1 : 0;
-                case NeuronType.Adaline:
-                    return SumInputs(inputValues.ToList());
-                default:
-                    throw new Exception("Neuron type not found");
-            }
+            return GetOutput(inputValues.ToList());
         }
 
         public void Learn(List<DataSetRecord> learningSet, double gain = 0.2, int numOfEpoch = 10000)
         {
+            // Log = "Input1\tInput2\tExpected\tCorrect\r\n";
             numOfRecords = learningSet.Count;
             if (numOfRecords == 0)
             {
@@ -89,9 +75,20 @@ namespace NeuralNetworks
                     LearnFromRecord(record, gain);
                     UpdateThreshold(gain);
                 }
+                // LogEpoch(ref learningSet);
                 MixRecords(ref learningSet);
             } while (!SolutionFound() & --numOfEpoch > 0);
-            Console.WriteLine(numOfEpoch);
+
+            // DataIO.WriteResults("results.txt", Log);
+        }
+
+        private void LogEpoch(ref List<DataSetRecord> learningSet)
+        {
+            foreach (var record in learningSet)
+            {
+                Log += record.WriteFormat();
+            }
+            Log += "\r\n\r\n\r\n";
         }
 
         private void MixRecords(ref List<DataSetRecord> learningSet)
@@ -114,7 +111,7 @@ namespace NeuralNetworks
                     Threshold = Threshold + gain * MeanTotalError;
                     break;
                 case NeuronType.Adaline:
-                    Threshold = 0;
+                    Threshold = 0.25;
                     break;
             }
         }
@@ -124,12 +121,20 @@ namespace NeuralNetworks
             var error = this.GetError(record.ExpectedOutput, record.Inputs);
             UpdateTotalNeuronError(error);
             UpdateWeights(record.Inputs, error, gain);
+            record.ActualOutput = GetOutput(record.Inputs);
         }
 
         private double GetError(int recordOutput, List<double> recordInputs)
         {
-
-            return recordOutput - GetOutput(recordInputs);
+            switch (NeuronType)
+            {
+                case NeuronType.Perceptron:
+                    return recordOutput - GetOutput(recordInputs);
+                case NeuronType.Adaline:
+                    return recordOutput - SumInputs(recordInputs);
+                default:
+                    throw new Exception("Neuron type not found");
+            }
         }
 
         private void UpdateTotalNeuronError(double error)

@@ -20,6 +20,14 @@ namespace NeuralNetworks
             }
         }
 
+        public static void WriteResults(string fileName, string results)
+        {
+            using (StreamWriter outputFile = new StreamWriter(fileName))
+            {
+                outputFile.Write(results);
+            }
+        }
+
         private static List<DataSetRecord> ParseData(string data)
         {
             var result = new List<DataSetRecord>();

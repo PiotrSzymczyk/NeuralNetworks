@@ -7,9 +7,3 @@ C:\Users\piotrek\Documents\Visual Studio 2015\Projects\NeuralNetworks\NeuralNetw
 C:\Users\piotrek\Documents\Visual Studio 2015\Projects\NeuralNetworks\NeuralNetworks\obj\Debug\NeuralNetworks.csproj.GenerateResource.Cache
 C:\Users\piotrek\Documents\Visual Studio 2015\Projects\NeuralNetworks\NeuralNetworks\obj\Debug\NeuralNetworks.exe
 C:\Users\piotrek\Documents\Visual Studio 2015\Projects\NeuralNetworks\NeuralNetworks\obj\Debug\NeuralNetworks.pdb
-C:\Users\piotrek\Documents\Visual Studio 2015\Projects\NeuralNetworks\NeuralNetworks\bin\Debug\OxyPlot.dll
-C:\Users\piotrek\Documents\Visual Studio 2015\Projects\NeuralNetworks\NeuralNetworks\bin\Debug\OxyPlot.Wpf.dll
-C:\Users\piotrek\Documents\Visual Studio 2015\Projects\NeuralNetworks\NeuralNetworks\bin\Debug\OxyPlot.pdb
-C:\Users\piotrek\Documents\Visual Studio 2015\Projects\NeuralNetworks\NeuralNetworks\bin\Debug\OxyPlot.xml
-C:\Users\piotrek\Documents\Visual Studio 2015\Projects\NeuralNetworks\NeuralNetworks\bin\Debug\OxyPlot.Wpf.pdb
-C:\Users\piotrek\Documents\Visual Studio 2015\Projects\NeuralNetworks\NeuralNetworks\bin\Debug\OxyPlot.Wpf.xml
