@@ -2,15 +2,24 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using System.Windows.Media;
+using LiveCharts;
+using LiveCharts.Defaults;
+using LiveCharts.Wpf;
 
 namespace NeuralNetworks
 {
     public partial class Form1 : Form
     {
         private static Neuron neuron;
+        private ScatterSeries errors;
+        private ScatterSeries positives;
+        private ScatterSeries negatives;
+
         public Form1()
         {
             InitializeComponent();
+
         }
 
         private void eval_Click(object sender, EventArgs e)
@@ -25,6 +34,9 @@ namespace NeuralNetworks
             neuron = new Neuron(datasetVal.First().Inputs.Count);
             neuron.NeuronType = isAdaline.Checked ? NeuronType.Adaline : NeuronType.Perceptron;
             neuron.MaxError = ReadDouble(maxError);
+            var chart = new ChartForm();
+            chart.Visible = true;
+            neuron.Logger = chart;
             neuron.Learn(datasetVal, ReadDouble(gain), (int)ReadDouble(epochCount));
             ShowPercepton();
         }

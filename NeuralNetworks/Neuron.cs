@@ -1,11 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Threading;
+using LiveCharts.Defaults;
+using LiveCharts.Wpf;
 
 namespace NeuralNetworks
 {
     public class Neuron
     {
+        public ICustomLogger Logger { get; set; }
         public double Threshold { get; private set; }
         public double BiasWeight { get; private set; }
         public List<double> InputWeights { get; }
@@ -13,8 +18,7 @@ namespace NeuralNetworks
         public NeuronType NeuronType { get; set; }
         public double MaxError { get; set; }
         public double MeanTotalError => totalNeuronError/numOfRecords;
-        public string Log { get; set; }
-
+        
         private double totalNeuronError;
         private int numOfRecords;
 
@@ -60,7 +64,6 @@ namespace NeuralNetworks
 
         public void Learn(List<DataSetRecord> learningSet, double gain = 0.2, int numOfEpoch = 10000)
         {
-            // Log = "Input1\tInput2\tExpected\tCorrect\r\n";
             numOfRecords = learningSet.Count;
             if (numOfRecords == 0)
             {
@@ -74,21 +77,10 @@ namespace NeuralNetworks
                 {
                     LearnFromRecord(record, gain);
                     UpdateThreshold(gain);
+                    Logger.Log(record);
                 }
-                // LogEpoch(ref learningSet);
                 MixRecords(ref learningSet);
             } while (!SolutionFound() & --numOfEpoch > 0);
-
-            // DataIO.WriteResults("results.txt", Log);
-        }
-
-        private void LogEpoch(ref List<DataSetRecord> learningSet)
-        {
-            foreach (var record in learningSet)
-            {
-                Log += record.WriteFormat();
-            }
-            Log += "\r\n\r\n\r\n";
         }
 
         private void MixRecords(ref List<DataSetRecord> learningSet)
@@ -170,5 +162,10 @@ namespace NeuralNetworks
             return BiasWeight + Enumerable.Range(0, Math.Max(inputValues.Count, InputWeights.Count))
                        .Sum(i => inputValues.ElementAtOrDefault(i)*InputWeights.ElementAtOrDefault(i));
         }
+    }
+
+    public interface ICustomLogger
+    {
+        void Log(DataSetRecord record);
     }
 }

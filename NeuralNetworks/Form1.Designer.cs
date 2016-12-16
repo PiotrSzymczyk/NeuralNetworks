@@ -37,6 +37,10 @@
             this.resultBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.epochCount = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.maxError = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.isAdaline = new System.Windows.Forms.CheckBox();
             this.learn = new System.Windows.Forms.Button();
             this.gain = new System.Windows.Forms.TextBox();
@@ -48,10 +52,6 @@
             this.label7 = new System.Windows.Forms.Label();
             this.biasVal = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.maxError = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.epochCount = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -72,7 +72,7 @@
             this.dataset.Name = "dataset";
             this.dataset.Size = new System.Drawing.Size(141, 20);
             this.dataset.TabIndex = 1;
-            this.dataset.Text = "AndTestSet.txt";
+            this.dataset.Text = "And.txt";
             // 
             // label2
             // 
@@ -149,6 +149,41 @@
             this.panel2.Size = new System.Drawing.Size(248, 179);
             this.panel2.TabIndex = 5;
             // 
+            // epochCount
+            // 
+            this.epochCount.Location = new System.Drawing.Point(99, 65);
+            this.epochCount.Name = "epochCount";
+            this.epochCount.Size = new System.Drawing.Size(142, 20);
+            this.epochCount.TabIndex = 11;
+            this.epochCount.Text = "2";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(3, 68);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(93, 13);
+            this.label8.TabIndex = 10;
+            this.label8.Text = "Max epoch count:";
+            // 
+            // maxError
+            // 
+            this.maxError.Enabled = false;
+            this.maxError.Location = new System.Drawing.Point(99, 115);
+            this.maxError.Name = "maxError";
+            this.maxError.Size = new System.Drawing.Size(141, 20);
+            this.maxError.TabIndex = 9;
+            this.maxError.Text = "0,08";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(39, 118);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(54, 13);
+            this.label6.TabIndex = 8;
+            this.label6.Text = "Max error:";
+            // 
             // isAdaline
             // 
             this.isAdaline.AutoSize = true;
@@ -176,7 +211,7 @@
             this.gain.Name = "gain";
             this.gain.Size = new System.Drawing.Size(141, 20);
             this.gain.TabIndex = 4;
-            this.gain.Text = "0,2";
+            this.gain.Text = "0,01";
             // 
             // label3
             // 
@@ -253,41 +288,6 @@
             this.label5.Size = new System.Drawing.Size(27, 13);
             this.label5.TabIndex = 0;
             this.label5.Text = "Bias";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(39, 118);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(54, 13);
-            this.label6.TabIndex = 8;
-            this.label6.Text = "Max error:";
-            // 
-            // maxError
-            // 
-            this.maxError.Enabled = false;
-            this.maxError.Location = new System.Drawing.Point(99, 115);
-            this.maxError.Name = "maxError";
-            this.maxError.Size = new System.Drawing.Size(141, 20);
-            this.maxError.TabIndex = 9;
-            this.maxError.Text = "0,08";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(3, 68);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(93, 13);
-            this.label8.TabIndex = 10;
-            this.label8.Text = "Max epoch count:";
-            // 
-            // epochCount
-            // 
-            this.epochCount.Location = new System.Drawing.Point(99, 65);
-            this.epochCount.Name = "epochCount";
-            this.epochCount.Size = new System.Drawing.Size(142, 20);
-            this.epochCount.TabIndex = 11;
-            this.epochCount.Text = "1000";
             // 
             // Form1
             // 
